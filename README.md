@@ -1,38 +1,92 @@
-# 42-miniRT
+# 42-minishell
 
 <img width="1498" alt="42-logo" src="https://user-images.githubusercontent.com/56789534/173826141-045ce31b-b8be-4065-b711-4e385cb72ef6.png">
 
-This 42 project is an introduction to the beautiful world of Raytracing. 
-It is one of the group projects in the 42 core curriculum. <br>
-Done by: [hepple42](https://github.com/hepple42) & [tjensen42](https://github.com/tjensen42) 
+This repository contains one of my projects of the core curriculum at [42 Heilbronn], done together with [tjensen42].
 
-Working on this project, we have noticed more and more interesting optical effects in everyday life and were constantly thinking about possible implementation in our RayTracer. Once the basic principle was implemented, it was fun to add more and more objects and functionalities. We were especially excited about implementing relatively fundamental physical laws in code.
+The project miniRT is an introduction to the beautiful world of raytracing. 
+As with all C projects at 42 Heilbronn, the code has to be written according to the 42 Norm (maximum 25 lines per function, no for loops, a certain set of allowed functions, ...).
 
-An excellent source on raytracing which helped us a lot is [Ray Tracing in One Weekend series of books](https://raytracing.github.io/) by Peter Shirley. It is a really detailed step-by-step guide for implementing a path-tracer in C++.
+## Description
 
-<br>
+The task in this project is to implement a raytracing algorithm to render computer-generated images, using the 42 graphics library [MLX42].
+The requirements include:
 
-## How to use it
+- 3 geometric objects: plane, sphere, cylinder
+- variable object size
+- rotation and translation of objects
+- lighting system: diffuse light, ambient light
+- configuration of scenes using a scene file with all relevant information
 
-The only supported and tested operating systems are ```macOS``` and ```Ubuntu 20.04```.
+The bonus part consists of:
 
-For ```Ubuntu``` it is necessary to install the GLFW library first:
+- specular reflections
+- checkerboard coloring
+- multiple light sources
+- another 3D object
+- textures
+
+## Approach
+
+Being a physicist, this was definitely my favorite project at 42 so far.
+This combination of fundamental physics and math one one side and the implementation in code on the other was really interesting to me.
+
+Working on this project, we noticed more and more interesting optical effects in everyday life and were constantly thinking about possible implementation in our raytracer.
+Once the basic principle was implemented, it was fun to add more and more objects and functionalities.
+
+As a result of this enthusiasm about the topic, we implemented a lot more features than the project required.
+As a general reference, we used the excellent [Ray Tracing in One Weekend] series of books by Peter Shirley, which offers a really detailed step-by-step guide for implementing a raytracer based on path tracing in C++.
+
+Our general approach for rendering is to generate multiple rays per image pixel, and to trace their complete path through the scene until they hit a source of light.
+Some surfaces in a scene cause scattering to a random direction, so we may get different results for each ray. Averaging over all the rays corresponding to one pixel, we obtain the final picture.
+Thus, increasing the number of rays per pixel results in better and better images.
+
+## Features
+
+The following features are implemented in our raytracer:
+
+- 7 types of objects: sphere, plane, rectangle, cuboid, disc, tube, cylinder
+- 3 types of light sources: sphere, rectangle, disc
+- 3 types of surface interactions: scattering, reflection, refraction (mixtures possible)
+- multithreading-based live rendering for improving image quality over time 
+- 3D movement
+- 2 different sampling techniques for diffuse scattering
+- textures and checkerboard coloring
+- ambient lighting
+
+## How to Use
+
+The only supported and tested operating systems are __macOS__ and __Ubuntu 20.04__.
+
+For Ubuntu, it is necessary to install the GLFW library first:
 ```
 sudo apt-get update && \
 sudo apt-get install libglfw3 && \
 sudo apt-get install libglfw3-dev
 ```
 
-<b>Compile and run miniRT in 3 simple steps:</b>
-1. ```git clone --depth 1 https://github.com/tjensen42/42-miniRT miniRT```
-2. ```cd miniRT && make```
-3. ```./miniRT scenes/template.rt```
+Compile and run miniRT in 3 simple steps:
 
-<br>
+Clone this repository:
+```
+git clone --depth 1 https://github.com/hepple42/42-miniRT miniRT
+```
+Change to the cloned directory and build the project:
+```
+cd miniRT && make
+```
+Run the program using our scene file template:
+```
+./miniRT scenes/template.rt
+```
+Alternatively, specify a custom scene file:
+```
+./miniRT [scene_file_path]
+```
 
-## Scenes
+## Scene File
 
-<b>Example: [Template](scenes/template.rt)</b>
+As an example and an overview of features and syntax, check our [template] scene file.
 
 | Identifier  | Description | Identifier    | Description
 | :---         | :---         | :---         | :---         |
@@ -48,7 +102,10 @@ sudo apt-get install libglfw3-dev
 |   |   | ```rt```  | Rectangle |
 |   |   | ```cu```  | Cuboid |
 
+## Movement
+
 ## Samples
+
 <img width="2672" alt="Screen Shot 2022-05-27 at 12 25 43 PM" src="https://user-images.githubusercontent.com/56789534/180815692-0fa071c2-1b2b-44e5-a3d9-6baf9aab7e5e.png">
 <img width="2628" alt="777" src="https://user-images.githubusercontent.com/56789534/180815726-fefe9787-4059-431f-a05d-43e2bc5220fd.png">
 <img width="2628" alt="135" src="https://user-images.githubusercontent.com/56789534/180815864-a63f059a-2897-4294-9042-de597fa87d11.png">
@@ -61,12 +118,11 @@ sudo apt-get install libglfw3-dev
 <img width="1112" alt="rgb-color" src="https://user-images.githubusercontent.com/56789534/180814564-d6d0e465-bf73-41b9-bceb-6b9f1f507b79.png">
 
 
-<br>
-<hr>
-<b>*This 42 project is written in C and in accordance to the 42 school norm.<br></b>
-<br>
+[42 Heilbronn]: https://www.42heilbronn.de/learncoderepeat
+[tjensen42]: https://github.com/tjensen42
 
-> #### Sample restrictions:
-> - All variables have to be declared and aligned at the top of each function
-> - Each function can not have more then 25 lines
-> - Projects should be created with allowed std functions otherwise it is cheating
+[MLX42]: https://github.com/codam-coding-college/MLX42
+
+[Ray Tracing in One Weekend]: https://raytracing.github.io/
+
+[template]: https://github.com/hepple42/42-miniRT/blob/main/scenes/template.rt
