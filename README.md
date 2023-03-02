@@ -49,7 +49,7 @@ The following features are implemented in our raytracer:
 - 3 types of light sources: sphere, rectangle, disc
 - 3 types of surface interactions: scattering, reflection, refraction (mixtures possible)
 - multithreading-based live rendering for improving image quality over time 
-- 3D movement
+- 3D camera movement and rotation
 - 2 different sampling techniques for diffuse scattering
 - textures and checkerboard coloring
 - ambient lighting
@@ -88,21 +88,73 @@ Alternatively, specify a custom scene file:
 
 As an example and an overview of features and syntax, check our [template] scene file.
 
-| Identifier  | Description | Identifier    | Description
-| :---         | :---         | :---         | :---         |
-| ```R```  | Resolution | ```ls```  | Light sphere |
-| ```S```  | Sampling specifications |```ld```  | Light disc |
-| ```B```  | Background |```lr```  | Light rectangle |
-| ```A```  | Ambient light |```tx```  | Texture |
-| ```C```  | Camera |```pl```  | Plane |
-|   |   | ```sp```  | Sphere |
-|   |   | ```cy```  | Cylinder |
-|   |   | ```tb```  | Tube |
-|   |   | ```di```  | Disc |
-|   |   | ```rt```  | Rectangle |
-|   |   | ```cu```  | Cuboid |
+<table>
+<tr><th>General</th><th>Lights</th><th>Textures</th><th>Objects</th></tr>
+<tr><td>
 
-## Movement
+| ID | Description |
+| :-- | :-- |
+| `R` | Resolution |
+| `S` | Sampling |
+| `B` | Background |
+| `A` | Ambient Light |
+| `C` | Camera |
+
+</td><td>
+
+| ID | Description |
+| :-- | :-- |
+| `ls` | Light Sphere |
+| `lr` | Light Rectangle |
+| `ld` | Light Disc |
+  
+</td><td>
+  
+| ID | Description |
+| :-- | :-- |
+| `tx` | Texture |
+  
+</td><td>
+  
+| ID | Description |
+| :-- | :-- |
+| `pl` | Plane |
+| `sp` | Sphere |
+| `cy` | Cylinder |
+| `tb` | Tube |
+| `di` | Disc |
+| `rt` | Rectangle |
+| `cu` | Cuboid |
+
+</td></tr> </table>
+
+## Camera Movement and Rotation
+
+Note that the image has to be rerendered after every camera adjustment.
+
+<table>
+<tr><th>Movement</th><th>Rotation</th></tr>
+<tr><td>
+
+| Key | Action |
+| :-- | :-- |
+| `W` | Move Forward |
+| `S` | Move Backward |
+| `A` | Move Left |
+| `D` | Move Right |
+| `E` | Move Up |
+| `Q` | Move Down |
+
+</td><td>
+
+| Key | Action |
+| :-- | :-- |
+| `⇧` | Rotate Up |
+| `⇩` | Rotate Down |
+| `⇦` | Rotate Left |
+| `⇨` | Rotate Right |
+
+</td></tr> </table>
 
 ## Samples
 
